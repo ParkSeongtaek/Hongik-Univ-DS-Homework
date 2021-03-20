@@ -1,4 +1,4 @@
-# Hongik-Univ-Cpp-Homework
+# Hongik-Univ-DS-Homework
 홍익대학교 2021년 1학기 자료구조 및 프로그래밍 수업 과제
 
 ## [hw1 - 연산자과적](https://github.com/kutta97/Hongik-Univ-Ds-Homework/tree/master/dsdir1/hw1.md)
