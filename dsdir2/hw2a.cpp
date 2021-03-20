@@ -1,3 +1,6 @@
+// 금속조형디자인과 3학년
+// B743014 양혜진
+
 #include <iostream>
 using namespace std;
 #include "polya.h"
