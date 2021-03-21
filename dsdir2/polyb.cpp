@@ -84,6 +84,7 @@ Polynomial Polynomial::operator*(Polynomial& b)
 {
 	Polynomial c;
 	
+	c.NewTerm(0, 0);
 	for (int i = 0; i < terms; i++)
 	{
 		Polynomial temp;
