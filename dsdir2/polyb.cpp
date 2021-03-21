@@ -84,13 +84,13 @@ Polynomial Polynomial::operator*(Polynomial& b)
 {
 	Polynomial c;
 	
-	c.NewTerm(0, 0);
 	for (int i = 0; i < terms; i++)
 	{
-		Polynomial temp;
+		Polynomial temp1;
+		Polynomial temp2;
 		for (int j = 0; j < b.terms; j++) // 계수끼리는 곱해주고, 지수끼리는 더해준다.
-			temp.NewTerm(termArray[i].coef * b.termArray[j].coef, termArray[i].exp + b.termArray[j].exp);
-		c = c + (temp);
+			temp1.NewTerm(termArray[i].coef * b.termArray[j].coef, termArray[i].exp + b.termArray[j].exp);
+		c = temp1 + temp2;
 	}
 	return c;
 }
