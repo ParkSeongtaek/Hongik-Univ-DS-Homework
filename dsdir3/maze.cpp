@@ -7,6 +7,7 @@
 const int MAXSIZE = 100; //up to 100 by 100 maze aㅣlowed
 bool maze[MAXSIZE + 2][MAXSIZE + 2] = { 0 };
 bool mark[MAXSIZE + 1][MAXSIZE + 1] = { 0 };
+int markCount = 0;
 
 enum directions{ N, NE, E, SE, S, SW, W, NW };
 struct offsets {
@@ -64,10 +65,12 @@ void Path(const int m, const int p) {
 				std::cout << stack;
 				temp.x = i; temp.y = j; std::cout << " -> " << temp;
 				temp.x = m; temp.y = p; std::cout << " -> " << temp << std::endl;
+				std::cout << "#nodes visited = " << markCount << " out of " << (m * p) << std::endl;
 				return;
 			}
 			if ((!maze[g][h]) && (!mark[g][h])) { // 새로운 위치
 				mark[g][h] = 1;
+				markCount++;
 				temp.x = i; temp.y = j; temp.dir = d + 1;
 				stack.push(temp);
 				i = g; j = h; d = N;
