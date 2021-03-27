@@ -32,7 +32,7 @@ std::ostream& operator<<(std::ostream& os, std::stack<T>& s) {
 	}
 	while (!s2.empty())
 	{
-		os << s2.top() << std::endl;
+		os << " -> " << s2.top();
 		s2.pop();
 	}
 	return os;
