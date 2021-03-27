@@ -3,7 +3,6 @@
 
 #include<iostream>
 #include<stack>
-using namespace std;
 
 const int MAXSIZE = 100; //up to 100 by 100 maze aㅣlowed
 bool maze[MAXSIZE + 2][MAXSIZE + 2] = { 0 };
@@ -20,36 +19,66 @@ struct Items {
 };
 
 template <class T>
-ostream& operator<<(ostream& os, stack<T>& s) {
+std::ostream& operator<<(std::ostream& os, std::stack<T>& s) {
+	std::stack<T> s2;
 	// 스택의 내용을 역순으로 출력
 	// 구현방법1: 하나씩 꺼내 다른 임시 스택에
 	// 저장한 후, 최종적으로 그 임시 스택에서 출력
 	// top(), pop(), push(..)의 사용법만 알면 됨
+	while (!s.empty())
+	{
+		s2.push(s.top());
+		s.pop();
+	}
+	while (s2.empty())
+	{
+		os << s2.top() << std::endl;
+		s2.pop();
+	}
 	return os;
 }
 
-ostream& operator<<(ostream& os, Items& item) {
+std::ostream& operator<<(std::ostream& os, Items& item) {
 	static int count = 0; // 5 Items 출력시 마다 줄바꾸기 위해
 	os << "(" << item.x << ", " << item.y << ")";
-	count++; if ((count % 5) == 0) cout << end;
+	count++; if ((count % 5) == 0) std::cout << std::endl;
 	return os;
 }
 
 void Path(const int m, const int p) {
+	// (1, 1)에서 시작
 	mark[1][1] = 1;
-	stack<Items> stack; // C++ STD stack 을 이용하라
-	Items temp(1, 1, E);
+	std::stack<Items> stack; // C++ STD stack 을 이용하라
+	Items temp(1, 1, E); // temp.x temp.y temp.dir를 설정한다
 	stack.push(temp);
-	// ...
-	/* 구현은 책과 동일하나, 최종 경로의 출력은 다음과 같다.
-		cout << stack;
-		temp.x = i; temp.y = j; cout << " -> " << temp;
-		temp.x = m; temp.y = p; cout << " -> " << temp << endl;
-	*/
-	// ...
+
+	while (!stack.empty()) // 스택이 공백이 아닐때
+	{
+		temp = stack.top();
+		stack.pop(); // 스택에서 삭제
+		int i = temp.x; int j = temp.y; int d = temp.dir;
+		while (d < 8) // 앞으로 이동
+		{ // [i][j] 에서 [g][h]로 이동한다.
+			int g = i + move[d].a; int h = j + move[d].b;
+			if ((g == m) && (h == p)) { // 출구 도착
+				std::cout << stack;
+				temp.x = i; temp.y = j; std::cout << " -> " << temp;
+				temp.x = m; temp.y = p; std::cout << " -> " << temp << std::endl;
+				return;
+			}
+			if ((!maze[g][h]) && (!mark[g][h])) { // 새로운 위치
+				mark[g][h] = 1;
+				temp.x = i; temp.y = j; temp.dir = d + 1;
+				stack.push(temp);
+				i = g; j = h; d = N;
+			}
+			else d++; // 새로운 방향 시도
+		}
+	}
+	std::cout << "No path in maze." << std::endl;
 }
 
-void getdata(istream& is, int& m, int& p) {
+void getdata(std::istream& is, int& m, int& p) {
 	// 자료파일을 읽어들여 maze 에 저장한다.
 	is >> m >> p;
 	for (int i = 0; i < m + 2; i++) // 왼쪽 벽과 오른쪽 벽 작성

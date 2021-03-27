@@ -14,8 +14,7 @@ int main(int argc, char* argv[]) {
 		cerr << "Usage" << argv[0] << " maze_data_file\n";
 	else {
 		ifstream is(argv[1]);
-		if (!is) { cerr << argv[1] << "does not exist\n";
-			return 1; }
+		if (!is) { cerr << argv[1] << "does not exist\n"; return 1; }
 		cout << "For maze datafile [" << argv[1] << "]\n";
 		getdata(is, m, p); is.close();
 		Path(m, p);
