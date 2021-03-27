@@ -49,6 +49,7 @@ std::ostream& operator<<(std::ostream& os, Items& item) {
 void Path(const int m, const int p) {
 	// (1, 1)에서 시작
 	mark[1][1] = 1;
+	markCount++;
 	std::stack<Items> stack; // C++ STD stack 을 이용하라
 	Items temp(1, 1, E); // temp.x temp.y temp.dir를 설정한다
 	stack.push(temp);
