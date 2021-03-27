@@ -30,7 +30,7 @@ std::ostream& operator<<(std::ostream& os, std::stack<T>& s) {
 		s2.push(s.top());
 		s.pop();
 	}
-	while (s2.empty())
+	while (!s2.empty())
 	{
 		os << s2.top() << std::endl;
 		s2.pop();
