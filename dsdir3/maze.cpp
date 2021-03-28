@@ -63,6 +63,7 @@ void Path(const int m, const int p) {
 		{ // [i][j] 에서 [g][h]로 이동한다.
 			int g = i + move[d].a; int h = j + move[d].b;
 			if ((g == m) && (h == p)) { // 출구 도착
+				mark[g][h] = 1;
 				markCount++;
 				std::cout << stack;
 				temp.x = i; temp.y = j; std::cout << " -> " << temp;
