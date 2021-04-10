@@ -16,7 +16,7 @@ Token::Token(char *arr, int l) : type(ID), len(l) {
 Token::Token(float v) : val(v), type(NUM) {}
 
 bool Token::operator==(char b) { return len==1 && str[0]==b; }
-bool Token::operator!=(char b) { return len!=1 && str[0]!=b; }
+bool Token::operator!=(char b) { return len!=1 || str[0]!=b; }
 bool Token::IsOperand() { return type == ID || type == NUM; }
 
 ostream& operator<<(ostream& os, Token t) {
@@ -33,8 +33,8 @@ bool GetID(Expression& e, Token& tok) {
 	if (!IsAlpha(c)) return false;
 	int pos_start = e.pos; e.pos++;
 	while (IsAlpha(c = e.buf[e.pos]) || IsDigit(c)) e.pos++;
-	int idlen = e.pos-pos_start;
-	tok = Token(e.buf+pos_start, idlen); // ID Token
+	int idlen = e.pos - pos_start;
+	tok = Token(e.buf + pos_start, idlen); // ID Token
 	return true;
 }
 
@@ -62,6 +62,7 @@ bool GetNUM(Expression& e, Token& tok) {
 }
 
 void SkipBlanks(Expression& e) {
+	//cout << "SkipBlanks() func called" << endl;
 	char c;
 	while (e.pos < e.len && ((c=e.buf[e.pos] == ' ' || c == '\t')))
 		e.pos++;
@@ -97,15 +98,15 @@ Token NextToken(Expression& e) {
 	Token tok;
 	SkipBlanks(e);
 	if (e.pos == e.len) tok = Token('#'); // 토큰 없음을 알리는 토큰
-	else if (GetID(e, tok)) { } // do nothing
+	else if (GetID(e, tok) || GetNUM(e, tok)) { } // do nothing
 	else if (TwoCharOp(e, tok)) { } // do nothing
 	else if (OneCharOp(e, tok)) { // 1자 토큰 여부 점검
 		if (e.infix && tok.type=='-' && !opndFound) // operand 후 아님
 			tok = Token('-', 'u', UMINUS); // -u (즉 unary -)로 바꾼다
 	 }
-	 else throw "Illegal Character Found";
-	 if (e.infix) opndFound = tok.IsOperand();
-	 return tok;
+	else throw "Illegal Character Found";
+	if (e.infix) opndFound = tok.IsOperand();
+	return tok;
 }
 
 int icp(Token& t) { // in-coming priority
@@ -136,7 +137,9 @@ void Postfix(Expression e) {
 	// stack.pop();
 	std::stack<Token> stack;
 	stack.push(Token('#'));
+	
 	for (Token x = NextToken(e); x != '#'; x = NextToken(e)) {
+		//cout << "start for iterator in Postfix() func" << endl;
 		if (x.IsOperand()) cout << x;
 		else if (x == ')') {
 			// unstack until '('
@@ -145,15 +148,17 @@ void Postfix(Expression e) {
 			stack.pop(); // unstack '('
 		}
 		else { // x is an operator
+			//cout << "x is an operator" << endl;
 			for (; isp(stack.top()) <= icp(x); stack.pop()){
 				if (x == '=' && stack.top() == '=') break;
 				cout << stack.top();
 			}
 			stack.push(x);
 		}
-		// end of expression; empty the stack
-		for (; stack.top() != '#'; cout << stack.top(), stack.pop());
-		stack.pop();
-		cout << endl;
 	}
+	// end of expression; empty the stack
+	//cout << "now print the stack" << endl;
+	while (stack.top()!='#') { cout << stack.top(); stack.pop(); }
+	stack.pop();
+	cout << endl;
 }
