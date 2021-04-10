@@ -62,7 +62,6 @@ bool GetNUM(Expression& e, Token& tok) {
 }
 
 void SkipBlanks(Expression& e) {
-	//cout << "SkipBlanks() func called" << endl;
 	char c;
 	while (e.pos < e.len && ((c=e.buf[e.pos] == ' ' || c == '\t')))
 		e.pos++;
@@ -139,7 +138,6 @@ void Postfix(Expression e) {
 	stack.push(Token('#'));
 	
 	for (Token x = NextToken(e); x != '#'; x = NextToken(e)) {
-		//cout << "start for iterator in Postfix() func" << endl;
 		if (x.IsOperand()) cout << x;
 		else if (x == ')') {
 			// unstack until '('
@@ -148,7 +146,6 @@ void Postfix(Expression e) {
 			stack.pop(); // unstack '('
 		}
 		else { // x is an operator
-			//cout << "x is an operator" << endl;
 			for (; isp(stack.top()) <= icp(x); stack.pop()){
 				if (x == '=' && stack.top() == '=') break;
 				cout << stack.top();
