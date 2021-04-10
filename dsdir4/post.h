@@ -3,14 +3,14 @@
 
 // 1자 토큰 이외의 토큰에 대한 토큰 타입의 정의가 필요함
 #define ID		257 // 변수 이름이 갖는 타입
-#define NUM		257 // 25나 35.7 같은 숫자가 갖는 타입
-#define EQ		257 // == 이 갖는 타입
-#define NE		257 // != 이 갖는 타입
-#define GE		257 // >= 이 갖는 타입
-#define LE		257 // <= 이 갖는 타입
-#define AND		257 // && 가 갖는 타입
-#define OR		257 // || 이 갖는 타입
-#define UMINUS	257 // -u(즉 unray -)가 갖는 타입
+#define NUM		258 // 25나 35.7 같은 숫자가 갖는 타입
+#define EQ		259 // == 이 갖는 타입
+#define NE		260 // != 이 갖는 타입
+#define GE		261 // >= 이 갖는 타입
+#define LE		262 // <= 이 갖는 타입
+#define AND		263 // && 가 갖는 타입
+#define OR		264 // || 이 갖는 타입
+#define UMINUS	265 // -u(즉 unray -)가 갖는 타입
 // 참고: 1자 (연산자) 토큰의 토큰타입 = 그 문자의 Ascii 코드
 #define MAXLEN	80
 
