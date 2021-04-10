@@ -45,7 +45,15 @@ bool GetNUM(Expression& e, Token& tok) {
 	while (IsDigit(c = e.buf[e.pos])) 
 		{ val = val * 10 + c - '0'; e.pos++; }
 	// (option) 현재 읽은 c 가 '.'이면 소수점 이하 추가 처리 필요
+	if (e.buf[e.pos] == '.') {
+		while (IsDigit(c = e.buf[e.pos])) 
+		{ val = val + (c - '0') / 10; e.pos++; }
+	}
 	// (option) 과학적 표기면 추가처리 필요
+	if (e.buf[e.pos] == 'e' || e.buf[e.pos] == 'E') {
+		while (IsDigit(c = e.buf[e.pos])) 
+		{ val = val + (c - '0') / 10; e.pos++; }
+	}
 	tok = Token(val); // 바뀌었음!
 	return true;
 }
@@ -111,4 +119,5 @@ void PostFix(Expression e) {
 	// STL 이용하고, 교재의 마지막 for 문을 다음 두 줄로 바꾼다.
 	// while (stack.top()!='#') { cout << stack.top(); stack.pop(); }
 	// stack.pop();
+	
 }
