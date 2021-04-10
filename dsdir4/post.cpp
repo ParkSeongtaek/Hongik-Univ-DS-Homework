@@ -123,7 +123,6 @@ int icp(Token& t) { // in-coming priority
 	if (t.type == OR) return 7;
 	if (t.type == '=') return 8;
 	if (t.type == '#') return 10;
-	return -1;
 }
 
 int isp(Token& t) { // '(' 경우 9를 기타는 icp(t)를 반환
