@@ -123,6 +123,7 @@ int icp(Token& t) { // in-coming priority
 	if (t.type == OR) return 7;
 	if (t.type == '=') return 8;
 	if (t.type == '#') return 10;
+	return -1;
 }
 
 int isp(Token& t) { // '(' 경우 9를 기타는 icp(t)를 반환
@@ -130,7 +131,7 @@ int isp(Token& t) { // '(' 경우 9를 기타는 icp(t)를 반환
 	else return icp(t);
 }
 
-void PostFix(Expression e) {
+void Postfix(Expression e) {
 	// STL 이용하고, 교재의 마지막 for 문을 다음 두 줄로 바꾼다.
 	// while (stack.top()!='#') { cout << stack.top(); stack.pop(); }
 	// stack.pop();
