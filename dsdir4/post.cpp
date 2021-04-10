@@ -126,7 +126,7 @@ int icp(Token& t) { // in-coming priority
 }
 
 int isp(Token& t) { // '(' 경우 9를 기타는 icp(t)를 반환
-	if (t.type == ')') return 9;
+	if (t.type == '(') return 9;
 	else return icp(t);
 }
 
