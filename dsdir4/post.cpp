@@ -134,5 +134,26 @@ void PostFix(Expression e) {
 	// STL 이용하고, 교재의 마지막 for 문을 다음 두 줄로 바꾼다.
 	// while (stack.top()!='#') { cout << stack.top(); stack.pop(); }
 	// stack.pop();
-	
+	std::stack<Token> stack;
+	stack.push(Token('#'));
+	for (Token x = NextToken(e); x != '#'; x = NextToken(e)) {
+		if (x.IsOperand()) cout << x;
+		else if (x == ')') {
+			// unstack until '('
+			for (; stack.top() != '('; stack.pop())
+				cout << stack.top();
+			stack.pop(); // unstack '('
+		}
+		else { // x is an operator
+			for (; isp(stack.top()) <= icp(x); stack.pop()){
+				if (x == '=' && stack.top() == '=') break;
+				cout << stack.top();
+			}
+			stack.push(x);
+		}
+		// end of expression; empty the stack
+		for (; stack.top() != '#'; cout << stack.top(), stack.pop());
+		stack.pop();
+		cout << endl;
+	}
 }
