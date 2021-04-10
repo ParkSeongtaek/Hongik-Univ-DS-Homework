@@ -51,10 +51,13 @@ bool GetNUM(Expression& e, Token& tok) {
 	}
 	// (option) 과학적 표기면 추가처리 필요
 	if (e.buf[e.pos] == 'e' || e.buf[e.pos] == 'E') {
+		int exponent = 0;
 		while (IsDigit(c = e.buf[e.pos])) 
-		{ val = val + (c - '0') / 10; e.pos++; }
+		{ exponent = exponent * 10 + c - '0'; e.pos++; }
+		while (exponent)
+		{ val  = val * 10; exponent--; }
 	}
-	tok = Token(val); // 바뀌었음!
+	tok = Token(val); // NUM Token
 	return true;
 }
 
@@ -107,12 +110,24 @@ Token NextToken(Expression& e) {
 
 int icp(Token& t) { // in-coming priority
 	// type 이 '('면 0, UMINUS 나 '!'면 1, '*'나 '/'나 '%'면 2,
+	if (t.type == '(') return 0;
+	if (t.type == UMINUS || t.type == '!') return 1;
+	if (t.type == '*' || t.type == '/' || t.type == '%') return 2;
 	// '+'나 '-'면 3, '<'나 '>'나 LE나 GE면 4, EQ나 NE면 5,
-	// AND면 6, OR이면 7, '='이면 9, '#'면 10을 return 한다.
+	if (t.type == '+' || t.type == '-') return 3;
+	if (t.type == '<' || t.type == '>') return 4;
+	if (t.type == LE || t.type == GE) return 4;
+	if (t.type == EQ || t.type == NE) return 5;
+	// AND면 6, OR이면 7, '='이면 8, '#'면 10을 return 한다.
+	if (t.type == AND) return 6;
+	if (t.type == OR) return 7;
+	if (t.type == '=') return 8;
+	if (t.type == '#') return 10;
 }
 
 int isp(Token& t) { // '(' 경우 9를 기타는 icp(t)를 반환
-
+	if (t.type == ')') return 9;
+	else return icp(t);
 }
 
 void PostFix(Expression e) {
