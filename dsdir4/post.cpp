@@ -46,11 +46,14 @@ bool GetNUM(Expression& e, Token& tok) {
 		{ val = val * 10 + c - '0'; e.pos++; }
 	// (option) 현재 읽은 c 가 '.'이면 소수점 이하 추가 처리 필요
 	if (e.buf[e.pos] == '.') {
+		e.pos++;
+		int point = 10;
 		while (IsDigit(c = e.buf[e.pos])) 
-		{ val = val + (c - '0') / 10; e.pos++; }
+		{ val = val + ((float)(c - '0') / point); point *= 10; e.pos++; }
 	}
 	// (option) 과학적 표기면 추가처리 필요
 	if (e.buf[e.pos] == 'e' || e.buf[e.pos] == 'E') {
+		e.pos++;
 		int exponent = 0;
 		while (IsDigit(c = e.buf[e.pos])) 
 		{ exponent = exponent * 10 + c - '0'; e.pos++; }
