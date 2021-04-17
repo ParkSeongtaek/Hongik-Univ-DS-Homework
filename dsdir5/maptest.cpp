@@ -23,7 +23,7 @@ void PrintValue(char *name) {
 	map<char *, float, cmp>::iterator iter;
 	iter = ST.find(name);
 	if (iter == ST.end())
-		cout << name << " does not exit" << endl;
+		cout << name << " does not exist" << endl;
 	else
 		cout << name << " " << ST[name] << endl;
 		// 원래는 cout << iter->first << " " << iter->second << endl;
