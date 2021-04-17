@@ -49,3 +49,25 @@ Token BinaryOp(int op, Token& left, Token& right)
 	else throw "No such binary operator";
 	return tmp;
 }
+
+void Eval(Expression e)
+{	// postfix 표현식을 입력으로 받아 그 값을 계산한다.
+	stack<Token> stack;
+	Token opnd1, opnd2;
+	for (Token x = NextToken(e); x != '#'; x = NextToken(e))
+	{
+		if (x.IsOperand()) stack.push(x);
+		else { // x 는 연산자 토큰이다.
+			int op = x.type; // 해당 연산자를 꺼내 저장
+			if (op == UMINUS || op == '!') { // unary operator
+				opnd1 = stack.top(); stack.pop();
+				stack.push(UnaryOp(op, opnd1));
+			} else { // binary opertor
+				opnd2 = stack.top(); stack.pop();
+				opnd1 = stack.top(); stack.pop();
+				stack.push(BinaryOp(op, opnd1, opnd2));
+			}
+		}
+	}
+	cout << stack.top() << endl; stack.pop(); // 최종 계산 결과 출력
+}
