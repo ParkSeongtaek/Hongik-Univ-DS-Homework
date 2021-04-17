@@ -25,11 +25,11 @@ float GetVal(Token& opnd) {
 	{
 		// ID 인 경우 ST 에서 그 값을 찾아 return 하고,
 		// ST 에 존재하지 않으면 0을 return 하자
-		// iter = ST.find((char *)opnd.str);
-		// if (iter == ST.end()) 
-		// 	return (0);
-		// else 
-		// 	return ST[(char *)opnd.str];
+		iter = ST.find((char *)opnd.str);
+		if (iter == ST.end()) 
+			return (0);
+		else 
+			return ST[(char *)opnd.str];
 	}
 }
 
