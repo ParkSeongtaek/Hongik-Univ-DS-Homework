@@ -84,7 +84,7 @@ bool TwoCharOp(Expression& e, Token& tok) {
 	else if (c == '!' && c2 == '=') op = NE;
 	else if (c == '&' && c2 == '&') op = AND;
 	else if (c == '|' && c2 == '|') op = OR;
-	else if (c == '>' && c2 == '=') op = GE;
+	else if (c == '-' && c2 == 'u') op = UMINUS;
 	else return false; // 2자 토큰이 아니면 false 를 return 한다.
 	tok = Token(c, c2, op); e.pos += 2;
 	return true;
