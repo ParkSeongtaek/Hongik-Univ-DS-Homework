@@ -8,7 +8,10 @@ ostream& operator<<(ostream& os, IntList& il)
 {
 	Node *ptr = il.first;
 	while (ptr != 0)
-		os << ptr->data << " "; ptr = ptr->link;
+	{
+		os << ptr->data << " ";
+		ptr = ptr->link;
+	}
 	os << endl;
 	return os;
 }
