@@ -57,24 +57,21 @@ void IntList::Push_Front(int e)	// 맨 앞에 노드 추가
 
 void IntList::Insert(int e) 	// 정렬된 리스트에 새 노드 추가
 {
-	Node *current;
-	Node *next;
-
-	if (!first)
-		first = last = new Node(e);
-	else if (e <= first->data)
-		Push_Front(e);
+	if (!first) Push_Front(e);
+	else if (first->data > e) Push_Front(e);
+	else if (first->data == e) { }
 	else {
-		current = first;
-		next = first->link;
-		while (!next)
+		Node *q = first; Node *p = first->link;
+		while (p && p->data < e)
 		{
-			if (e > current->data && e <= next->data)
-				break ;
-			current = next;
-			next = next->link;
+			q = p;
+			p = p->link;
 		}
-		current->link = new Node(e);
-		current->link->link = next;
+		if (!p) Push_Back(e);
+		else if ( p-> data == e ) { }
+		else {
+			q->link = new Node(e);
+			q->link->link = p;
+		}
 	}
 }
