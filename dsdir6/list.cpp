@@ -4,9 +4,9 @@
 #include <iostream>
 #include "list.h"
 
-ostream& operator<<(ostream& os, IntList& i1)
+ostream& operator<<(ostream& os, IntList& il)
 {
-	Node *ptr = i1.first;
+	Node *ptr = il.first;
 	while (ptr != 0)
 		os << ptr->data << " "; ptr = ptr->link;
 	os << endl;
