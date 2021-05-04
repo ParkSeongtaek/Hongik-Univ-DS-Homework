@@ -25,7 +25,7 @@ class Tree {
 		void Insert(T value) { Insert(root, value); }
 		void Preorder() { Preorder(root); }
 		void Inorder() { Inorder(root); }
-		void Postorder() { Postorder(root) }
+		void Postorder() { Postorder(root); }
 
 		void Levelorder();
 	private: // helper 함수들
@@ -52,7 +52,7 @@ void Tree<T>::Insert(Node<T>* &ptr,T value) { // Insert의 helper 함수
 template<class T>
 void Tree<T>::Preorder(Node<T> *currentNode) { // Preorder의 helper 함수
 	if (currentNode) {
-		Visit(currentNode)
+		Visit(currentNode);
 		Preorder(currentNode->leftChild);
 		Preorder(currentNode->rightChild);
 	}
