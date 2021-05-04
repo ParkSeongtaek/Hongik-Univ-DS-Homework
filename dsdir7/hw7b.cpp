@@ -10,7 +10,7 @@ int main() {
 
 	cout << "Enter string & value pairs:\n";
 	while (cin >> str >> dval)
-		tree.Insert(str, dval);
+		bst.Insert(str, dval);
 	cout << endl << "Preorder traversal:	"; bst.Preorder();
 	cout << endl << "Inorder traversal:	"; bst.Inorder();
 	cout << endl << "Postorder traversal:	"; bst.Postorder();

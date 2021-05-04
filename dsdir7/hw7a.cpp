@@ -14,5 +14,5 @@ int main() {
 	cout << endl << "Inorder traversal:	"; tree.Inorder();
 	cout << endl << "Postorder traversal:	"; tree.Postorder();
 	cout << endl << "Levelorder traversal:	"; tree.Levelorder();
-	cout << endl
+	cout << endl;
 }
