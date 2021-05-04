@@ -60,17 +60,36 @@ void Tree<T>::Preorder(Node<T> *currentNode) { // Preorder의 helper 함수
 
 template<class T>
 void Tree<T>::Inorder(Node<T> *currentNode) { // Inorder helper 함수
-
+	if (currentNode) {
+		Inorder(currentNode->leftChild);
+		Visit(currentNode);
+		Inorder(currentNode->rightChild);
+	}
 }
 
 template<class T>
 void Tree<T>::Postorder(Node<T> *currentNode) { // Postorder의 helper 함수
-
+	if (currentNode) {
+		Postorder(currentNode->leftChild);
+		Postorder(currentNode->rightChild);
+		Visit(currentNode);
+	}
 }
 
 template<class T>
-void Levelorder(Node<T> *currentNode) { // Preorder의 helper 함수
-
+void Tree<T>::Levelorder() { // Preorder의 helper 함수
+	queue<Node<T>*> q; // queue is declared
+	Node<T>* currentNode = root;
+	while (currentNode) {
+		Visit(currentNode);
+		if (currentNode->leftChild)
+			q.push(currentNode->leftChild);
+		if (currentNode->rightChild)
+			q.push(currentNode->rightChild);
+		if (q.empty()) return;
+		currentNode = q.front(); // take one from the queue.
+		q.pop();
+	}
 }
 
 #endif
