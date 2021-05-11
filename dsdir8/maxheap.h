@@ -14,7 +14,10 @@ class MaxHeap {
 		void Push(const T& e);
 		void Pop();
 		bool IsEmpty() { return heapSize == 0; }
-		T Top() {  }
+		T Top() {
+			if (IsEmpty()) throw "You can't call Top() for an empty Heap.";
+			return heap[1];
+		}
 	private:
 		int heapSize;	// #elements in heap
 		int capacity;	// size of the array heap
@@ -25,10 +28,11 @@ class MaxHeap {
 
 template <class T>
 void ChangeSize1D(T *&a, const int oldSize, const int newSize) {
+	if (newSize < 0) throw "newSize must be greater than 0";
 	T *temp = new T[newSize];
-	memcpy(temp, heap, (oldSize * sizeof(T)));
-	delete[]heap;
-	heap = temp;
+	copy(a, a + oldSize, temp);
+	delete[] a;
+	a = temp;
 }
 
 template <class T>
@@ -41,7 +45,7 @@ ostream& operator<<(ostream& os, MaxHeap<T>& H) {
 
 template <class T>
 MaxHeap<T>::MaxHeap (int theCapacity = 10) : heapSize(0) {
-	if (theCapacity < 1) throw "Must be +ve";
+	if (theCapacity < 1) throw "Heap Capacity must be +ve";
 	capacity = theCapacity;
 	heap = new T[capacity + 1]; // heap[0]는 사용안함
 }
