@@ -18,6 +18,14 @@ void File2Tree(istream& fin, BST<string, int>& tree) {
                     << elt << endl;
             else cout << "No such key: " << key << endl;
         }
+        else if (command == "rankget") {
+            fin >> r;
+            if (tree.RankGet(r, key, elt))
+                cout << "The " << r << "-th element is " << key << ":" << elt << endl;
+            else cout << "No such ranking:" << r << endl;
+        }
+        else if (command == "delete")
+            { fin >> key; tree.Delete(key); }
         else
             cout << "Invalid command : " << command << endl;
     }

@@ -27,6 +27,8 @@ class BST {
 		void Inorder() { Inorder(root); }
 		void Postorder() { Postorder(root); }
 		bool Get(const K&, E&);
+		bool RankGet(int r, K k, E e);
+		void Delete(K &oldkey) { Delete(root, oldkey); }
 		bool Print();
 
 	private: // helper 함수들
