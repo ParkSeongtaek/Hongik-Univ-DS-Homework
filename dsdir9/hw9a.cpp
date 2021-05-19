@@ -14,7 +14,7 @@ void File2Tree(istream& fin, BST<string, int>& tree) {
         else if(command == "get") {
             fin >> key;
             if (tree.Get(key, elt))
-                cout << "The value of " << key << "is"
+                cout << "The value of " << key << " is "
                     << elt << endl;
             else cout << "No such key: " << key << endl;
         }

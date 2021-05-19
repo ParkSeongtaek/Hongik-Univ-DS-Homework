@@ -74,7 +74,7 @@ bool BST<K, E>::Get(const K& k, E& e) {
 	Node<K, E> *ptr = root;
 	while (ptr) {
 		if (k < ptr->key) ptr = ptr->leftChild;
-		else if (k > ptr->key) 
+		else if (k > ptr->key) ptr = ptr->rightChild;
 		else { e = ptr->element; return true; }
 	}
 	return false;
