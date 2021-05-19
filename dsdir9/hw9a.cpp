@@ -4,14 +4,14 @@
 #include <fstream>
 #include "bst.h" // include file 명이 바뀌었음
 
-voidFile2Tre(istream& fin, BST<string, int>& tree) {
+void File2Tree(istream& fin, BST<string, int>& tree) {
     string command, key; int elt; int r;
 
     while(fin >> command) {
         if(command == "print") tree.Print();
-        else if(comand == "insert")
+        else if(command == "insert")
             { fin >> key >> elt; tree.Insert(key,elt); }
-        else if(comand == "get") {
+        else if(command == "get") {
             fin >> key;
             if (tree.Get(key, elt))
                 cout << "The value of " << key << "is"
