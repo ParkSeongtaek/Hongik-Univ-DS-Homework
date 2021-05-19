@@ -33,7 +33,8 @@ class BST {
 
 	private: // helper 함수들
 		void Visit(Node<K, E> *); 
-		void Insert(Node<K, E>* &, K, E); 
+		void Insert(Node<K, E>* &, K, E);
+		void Delete(Node<K, E>* &. K &);
 		void Preorder(Node<K, E> *); 
 		void Inorder(Node<K, E> *); 
 		void Postorder(Node<K, E> *);
