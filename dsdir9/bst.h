@@ -153,6 +153,10 @@ void BST<K, E>::TwoWayJoin(BST<K, E>& small, BST<K, E>& big) {
 	BST small2 = small;
 	// 이제 small2를 수정하고 midkey와 midel을 알아내어
 	// ThreeWayJoin을 호출하도록 한다.
+	Node<K, E> *largest = small2.root;
+	while (largest->rightChild) { largest = largest->rightChild; }
+	small.Delete(largest->key);
+	ThreeWayJoin(small, largest->key, largest->element, big);
 	small.root = 0; big.root = 0;
 }
 
