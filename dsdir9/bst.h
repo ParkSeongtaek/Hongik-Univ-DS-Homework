@@ -142,7 +142,7 @@ bool BST<K, E>::RankGet(int r, K& k, E& e) {
 
 template<class K, class E>
 void BST<K, E>::ThreeWayJoin(BST<K, E>& small, K midkey, E midel, BST<K, E>& big) {
-	root = new Node<K, E>(midkey, midel, small.root, big.root);
+	root = new Node<K, E>(midkey, midel, 1, small.root, big.root);
 	small.root = big.root = 0;
 }
 
