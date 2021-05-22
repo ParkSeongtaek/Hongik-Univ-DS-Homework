@@ -111,7 +111,10 @@ template <class K, class E>
 void BST<K, E>::Delete(Node<K, E>* &ptr, K oldkey) {
 	Node<K, E> *tmpptr; Node<K, E> *tmpdaddyptr;
 	if (ptr == 0) return; // 그런 노드가 없으므로, 그냥 return
-	if (oldkey < ptr->key) Delete(ptr->leftChild, oldkey);
+	if (oldkey < ptr->key) {
+		ptr->leftSize--;
+		Delete(ptr->leftChild, oldkey);
+	}
 	else if (oldkey > ptr->key) Delete(ptr->rightChild, oldkey);
 	else { // ptr 노드가 바로 지울 노드인 경우
 		if (!ptr->leftSize && !ptr->rightChild) { delete ptr; ptr = 0; return; }
@@ -127,8 +130,10 @@ void BST<K, E>::Delete(Node<K, E>* &ptr, K oldkey) {
 				delete rc; return;
 			}
 			else {
+				rc->leftSize--;
 				Node<K, E> *lc = rc->leftChild;
 				while (!lc->leftChild) { 
+					lc->leftSize--;
 					tmpdaddyptr = lc;
 					lc = lc->leftChild; 
 				}
