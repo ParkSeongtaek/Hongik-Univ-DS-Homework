@@ -132,7 +132,7 @@ void BST<K, E>::Delete(Node<K, E>* &ptr, K oldkey) {
 			else {
 				rc->leftSize--;
 				Node<K, E> *lc = rc->leftChild;
-				while (!lc->leftChild) { 
+				while (!lc->leftChild) {
 					lc->leftSize--;
 					tmpdaddyptr = lc;
 					lc = lc->leftChild; 
