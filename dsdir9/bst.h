@@ -100,7 +100,7 @@ bool BST<K, E>::RankGet(int r, K& k, E& e) {
 		if (r < ptr->leftSize) ptr = ptr->leftChild;
 		else if (r > ptr->leftSize) {
 			r -= ptr->leftSize;
-			ptr = ptr->rightChild
+			ptr = ptr->rightChild;
 		}
 		else { k = ptr->key; e = ptr->element; return true; }
 	}
@@ -122,7 +122,7 @@ void BST<K, E>::Delete(Node<K, E>* &ptr, K oldkey) {
 		else {
 			Node<K, E> *rc = ptr->rightChild;
 			if (!rc->leftChild) { 
-				ptr->key = rc->key; ptr->element = rc;
+				ptr->key = rc->key; ptr->element = rc->element;
 				ptr->rightChild = rc->rightChild;
 				delete rc; return;
 			}
