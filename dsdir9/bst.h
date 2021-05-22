@@ -58,56 +58,6 @@ void BST<K, E>::Insert(Node<K, E>* &ptr, K newkey, E el) { // Insert의 helper �
 }
 
 template <class K, class E>
-void BST<K, E>::Inorder(Node<K, E> *currentNode) { // Inorder helper 함수
-	if (currentNode) {
-		Inorder(currentNode->leftChild);
-		Visit(currentNode);
-		Inorder(currentNode->rightChild);
-	}
-}
-
-template <class K, class E>
-void BST<K, E>::Postorder(Node<K, E> *currentNode) { // Postorder의 helper 함수
-	if (currentNode) {
-		Postorder(currentNode->leftChild);
-		Postorder(currentNode->rightChild);
-		Visit(currentNode);
-	}
-}
-
-template <class K, class E>
-bool BST<K, E>::Get(const K& k, E& e) {
-	Node<K, E> *ptr = root;
-	while (ptr) {
-		if (k < ptr->key) ptr = ptr->leftChild;
-		else if (k > ptr->key) ptr = ptr->rightChild;
-		else { e = ptr->element; return true; }
-	}
-	return false;
-}
-
-template <class K, class E>
-bool BST<K, E>::Print() {
-	cout << endl << "Inorder traversal :	"; Inorder();
-	cout << endl << "Postorder traversal :	"; Postorder();
-	cout << endl;
-}
-
-template <class K, class E>
-bool BST<K, E>::RankGet(int r, K& k, E& e) {
-	Node<K, E> *ptr = root;
-	while (ptr) {
-		if (r < ptr->leftSize) ptr = ptr->leftChild;
-		else if (r > ptr->leftSize) {
-			r -= ptr->leftSize;
-			ptr = ptr->rightChild;
-		}
-		else { k = ptr->key; e = ptr->element; return true; }
-	}
-	return false;
-}
-
-template <class K, class E>
 void BST<K, E>::Delete(Node<K, E>* &ptr, K oldkey) {
 	Node<K, E> *tmpptr; Node<K, E> *tmpdaddyptr;
 	if (ptr == 0) return; // 그런 노드가 없으므로, 그냥 return
@@ -143,6 +93,56 @@ void BST<K, E>::Delete(Node<K, E>* &ptr, K oldkey) {
 			}
 		}
 	}
+}
+
+template <class K, class E>
+void BST<K, E>::Inorder(Node<K, E> *currentNode) { // Inorder helper 함수
+	if (currentNode) {
+		Inorder(currentNode->leftChild);
+		Visit(currentNode);
+		Inorder(currentNode->rightChild);
+	}
+}
+
+template <class K, class E>
+void BST<K, E>::Postorder(Node<K, E> *currentNode) { // Postorder의 helper 함수
+	if (currentNode) {
+		Postorder(currentNode->leftChild);
+		Postorder(currentNode->rightChild);
+		Visit(currentNode);
+	}
+}
+
+template <class K, class E>
+bool BST<K, E>::Get(const K& k, E& e) {
+	Node<K, E> *ptr = root;
+	while (ptr) {
+		if (k < ptr->key) ptr = ptr->leftChild;
+		else if (k > ptr->key) ptr = ptr->rightChild;
+		else { e = ptr->element; return true; }
+	}
+	return false;
+}
+
+template <class K, class E>
+bool BST<K, E>::RankGet(int r, K& k, E& e) {
+	Node<K, E> *ptr = root;
+	while (ptr) {
+		if (r < ptr->leftSize) ptr = ptr->leftChild;
+		else if (r > ptr->leftSize) {
+			r -= ptr->leftSize;
+			ptr = ptr->rightChild;
+		}
+		else { k = ptr->key; e = ptr->element; return true; }
+	}
+	return false;
+}
+
+template <class K, class E>
+bool BST<K, E>::Print() {
+	cout << endl << "Inorder traversal :	"; Inorder();
+	cout << endl << "Postorder traversal :	"; Postorder();
+	cout << endl;
 }
 
 #endif
