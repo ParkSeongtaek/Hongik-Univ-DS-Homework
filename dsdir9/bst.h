@@ -27,15 +27,11 @@ class BST {
 		void Inorder() { Inorder(root); }
 		void Postorder() { Postorder(root); }
 		bool Get(const K&, E&);
-		bool RankGet(int r, K k, E e);
-		void Delete(K &oldkey) { Delete(root, oldkey); }
 		bool Print();
 
 	private: // helper 함수들
 		void Visit(Node<K, E> *); 
 		void Insert(Node<K, E>* &, K, E);
-		void Delete(Node<K, E>* &. K &);
-		void Preorder(Node<K, E> *); 
 		void Inorder(Node<K, E> *); 
 		void Postorder(Node<K, E> *);
 
@@ -85,8 +81,8 @@ bool BST<K, E>::Get(const K& k, E& e) {
 
 template <class K, class E>
 bool BST<K, E>::Print() {
-	cout << endl << "Inorder traversal : "; Inorder();
-	cout << endl << "Postorder traversal : "; Postorder();
+	cout << endl << "Inorder traversal :	"; Inorder();
+	cout << endl << "Postorder traversal :	"; Postorder();
 	cout << endl;
 }
 
