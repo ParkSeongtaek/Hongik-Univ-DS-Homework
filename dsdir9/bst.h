@@ -30,6 +30,8 @@ class BST {
 		void Postorder() { Postorder(root); }
 		bool Get(const K&, E&);
 		bool RankGet(int r, K& k, E& e);
+		void ThreeWayJoin(BST<K, E>& small, K midkey, E midel, BST<K, E>& big);
+		void TwoWayJoin(BST<K, E>& small, BST<K, E>& big);
 		bool Print();
 
 	private: // helper 함수들
@@ -136,6 +138,22 @@ bool BST<K, E>::RankGet(int r, K& k, E& e) {
 		else { k = ptr->key; e = ptr->element; return true; }
 	}
 	return false;
+}
+
+template<class K, class E>
+void BST<K, E>::ThreeWayJoin(BST<K, E>& small, K midkey, E midel, BST<K, E>& big) {
+	root = new Node<K, E>(midkey, midel, small.root, big.root);
+	small.root = big.root = 0;
+}
+
+template<class K, class E>
+void BST<K, E>::TwoWayJoin(BST<K, E>& small, BST<K, E>& big) {
+	if (!small.root) { root = big.root; big.root = 0; return; }
+	if (!big.root) { root = small.root; small.root = 0; return; }
+	BST small2 = small;
+	// 이제 small2를 수정하고 midkey와 midel을 알아내어
+	// ThreeWayJoin을 호출하도록 한다.
+	small.root = 0; big.root = 0;
 }
 
 template <class K, class E>
