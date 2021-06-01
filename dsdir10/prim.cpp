@@ -31,7 +31,7 @@ void prim() {
 		int root0 = sets.Find(0); // 현재 선택된 노드들의 루트를 구한다.
 		// 꺼낸 e가 자격이 있으면 출력하고 e의 새로운 vertex에 대해 처리한다.
 		int v1root = sets.Find(e.v1); int v2root = sets.Find(e.v2);
-		if (v1root != v2root && (!visited[e.v1] || !visited[e.v2])) { // different sets
+		if ((v1root != root0 || v2root != root0) && (!visited[e.v1] || !visited[e.v2])) { // different sets
 			sets.Union(v1root, v2root); nedges++;
 			int vertex = !visited[e.v1] ? e.v1 : e.v2;
 			visited[vertex] = 1;
