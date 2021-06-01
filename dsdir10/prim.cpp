@@ -30,10 +30,14 @@ void prim() {
 		Edge e = PQ.top(); PQ.pop();
 		int root0 = sets.Find(0); // 현재 선택된 노드들의 루트를 구한다.
 		// 꺼낸 e가 자격이 있으면 출력하고 e의 새로운 vertex에 대해 처리한다.
-		int v1root = sets.Find(e.v1); int v2root = sets.Find(e.v2);
-		if ((v1root != root0 || v2root != root0) && (!visited[e.v1] || !visited[e.v2])) { // different sets
-			sets.Union(v1root, v2root); nedges++;
-			int vertex = !visited[e.v1] ? e.v1 : e.v2;
+		int vertex;
+		if (!visited[e.v1]) vertex = e.v1;
+		else if (!visited[e.v2]) vertex = e.v2;
+		else continue;
+
+		int vroot = sets.Find(vertex);
+		if (vroot != root0) { // different sets
+			sets.Union(e.v1, e.v2); nedges++;
 			visited[vertex] = 1;
 			MoveIntoPQ_EdgesOfNode(vertex);
 			cout << e;
