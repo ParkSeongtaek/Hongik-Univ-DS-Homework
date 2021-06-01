@@ -34,8 +34,9 @@ void prim() {
 		else continue;
 
 		sets.Union(e.v1, e.v2); nedges++;
-		MoveIntoPQ_EdgesOfNode(v);
 		cout << e;
+
+		MoveIntoPQ_EdgesOfNode(v);
 	}
 }
 
