@@ -32,7 +32,7 @@ int main(int argc, char *argv[]) {
 	if (argc==1) is.open("mstree.dat"); else is.open(argv[1]);
 	if (!is) { cerr << "No such input file\n"; return 1; }
 	is >> NNODES;
-	if (NNODES < 2) { cerr << "#nodes must ne 2.." << endl; return 1; }
+	if (NNODES < 2) { cerr << "#nodes must be 2.." << endl; return 1; }
 
 	try { ReadEdges4kruskal(is); kruskal(); }
 	catch (char const *str)
