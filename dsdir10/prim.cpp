@@ -21,27 +21,21 @@ void MoveIntoPQ_EdgesOfNode(int v) {
 void prim() {
 	Sets sets(NNODES);
 	int nedges = 0; // #edges found up to now
-	int visited[NNODES-1];
-	fill(visited, visited + NNODES, 0);
-	visited[0] = 1;
 
 	while (nedges < NNODES - 1) {
 		if (PQ.empty()) throw "No Spanning Tree Exists.";
 		Edge e = PQ.top(); PQ.pop();
 		int root0 = sets.Find(0); // 현재 선택된 노드들의 루트를 구한다.
 		// 꺼낸 e가 자격이 있으면 출력하고 e의 새로운 vertex에 대해 처리한다.
-		int vertex;
-		if (!visited[e.v1]) vertex = e.v1;
-		else if (!visited[e.v2]) vertex = e.v2;
+		int v;
+
+		if (sets.Find(e.v1) != root0) v = e.v1;
+		else if (sets.Find(e.v2) != root0) v = e.v2;
 		else continue;
 
-		int vroot = sets.Find(vertex);
-		if (vroot != root0) { // different sets
-			sets.Union(e.v1, e.v2); nedges++;
-			visited[vertex] = 1;
-			MoveIntoPQ_EdgesOfNode(vertex);
-			cout << e;
-		}
+		sets.Union(e.v1, e.v2); nedges++;
+		MoveIntoPQ_EdgesOfNode(v);
+		cout << e;
 	}
 }
 

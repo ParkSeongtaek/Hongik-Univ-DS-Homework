@@ -10,7 +10,8 @@ int NNODES; // #nodes in the graph is global
 priority_queue<Edge, vector<Edge>, Compare> *PQ;
 
 void sollin() {
-
+	Sets sets(NNODES);
+	int nedges = 0; // #edges found up to now
 }
 
 void ReadEdges4sollin(istream& is) {
