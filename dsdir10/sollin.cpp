@@ -12,6 +12,27 @@ priority_queue<Edge, vector<Edge>, Compare> *PQ;
 void sollin() {
 	Sets sets(NNODES);
 	int nedges = 0; // #edges found up to now
+
+	for (int v = 0; v < NNODES - 1; v++) {
+		if (PQ[v].empty()) throw "No Spanning Tree Exists.";
+		Edge e = PQ[v].top(); PQ[v].pop();
+		int v1root = sets.Find(e.v1); int v2root = sets.Find(e.v2);
+		if  (v1root != v2root) {
+			sets.Union(e.v1, e.v2);
+			cout << e; nedges++;
+		}
+	}
+
+	// while(nedges < NNODES - 1) {
+	// 	if (PQ.empty()) throw "No Spanning Tree Exists.";
+	// 	Edge e = PQ.top(); PQ.pop();
+
+	// 	int v1root = sets.Find(e.v1); int v2root = sets.Find(e.v2);
+	// 	if (v1root != v2root) { // different sets
+	// 		sets.Union(v1root, v2root); nedges++;
+	// 		cout << e;
+	// 	}
+	// }
 }
 
 void ReadEdges4sollin(istream& is) {
