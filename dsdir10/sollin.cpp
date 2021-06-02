@@ -32,11 +32,11 @@ void sollin() {
 			else MergePQ(v2root, vroot);
 		}
 	}
+
 	int v = 0;
 	while (nedges < NNODES - 1) {
-		if (PQ[v].empty()) {
-			v++; continue;
-		}
+		if (PQ[v].empty()) { v++; continue; }
+
 		Edge e = PQ[v].top(); PQ[v].pop();
 		int v1root = sets.Find(e.v1); int v2root = sets.Find(e.v2);
 		if (v1root != v2root) { // different sets
