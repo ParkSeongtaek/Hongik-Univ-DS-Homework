@@ -9,6 +9,13 @@ int NNODES; // #nodes in the graph is global
 
 priority_queue<Edge, vector<Edge>, Compare> *PQ;
 
+void MergePQ(int v, int root) {
+	while (!PQ[v].empty()) {
+		Edge e = PQ[v].top(); PQ[v].pop();
+		PQ[root].push(e);
+	}
+}
+
 void sollin() {
 	Sets sets(NNODES);
 	int nedges = 0; // #edges found up to now
@@ -20,18 +27,9 @@ void sollin() {
 		if  (v1root != v2root) {
 			sets.Union(e.v1, e.v2);
 			cout << e; nedges++;
-			if (!PQ[v1root].empty()) {
-				while (!PQ[v1root].empty()) {
-					Edge e = PQ[v1root].top(); PQ[v1root].pop();
-					PQ[v2root].push(e);
-				}
-			}else {
-				int vroot = sets.Find(e.v1);
-				while (!PQ[v2root].empty()) {
-					Edge e = PQ[v1root].top(); PQ[v1root].pop();
-					PQ[vroot].push(e);
-				}
-			}
+			int vroot = sets.Find(e.v1);
+			if (!PQ[v2root].empty()) MergePQ(v1root, v2root);
+			else MergePQ(v2root, vroot);
 		}
 	}
 	int v = 0;
