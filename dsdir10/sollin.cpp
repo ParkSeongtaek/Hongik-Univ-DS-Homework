@@ -20,19 +20,33 @@ void sollin() {
 		if  (v1root != v2root) {
 			sets.Union(e.v1, e.v2);
 			cout << e; nedges++;
+			if (!PQ[v1root].empty()) {
+				while (!PQ[v1root].empty()) {
+					Edge e = PQ[v1root].top(); PQ[v1root].pop();
+					PQ[v2root].push(e);
+				}
+			}else {
+				int vroot = sets.Find(e.v1);
+				while (!PQ[v2root].empty()) {
+					Edge e = PQ[v1root].top(); PQ[v1root].pop();
+					PQ[vroot].push(e);
+				}
+			}
 		}
 	}
-
-	// while(nedges < NNODES - 1) {
-	// 	if (PQ.empty()) throw "No Spanning Tree Exists.";
-	// 	Edge e = PQ.top(); PQ.pop();
-
-	// 	int v1root = sets.Find(e.v1); int v2root = sets.Find(e.v2);
-	// 	if (v1root != v2root) { // different sets
-	// 		sets.Union(v1root, v2root); nedges++;
-	// 		cout << e;
-	// 	}
-	// }
+	int v = 0;
+	while (nedges < NNODES - 1) {
+		if (PQ[v].empty()) {
+			v++; continue;
+		}
+		Edge e = PQ[v].top(); PQ[v].pop();
+		int v1root = sets.Find(e.v1); int v2root = sets.Find(e.v2);
+		if (v1root != v2root) { // different sets
+			sets.Union(v1root, v2root); nedges++;
+			cout << e;
+		}
+		v++;
+	}
 }
 
 void ReadEdges4sollin(istream& is) {
