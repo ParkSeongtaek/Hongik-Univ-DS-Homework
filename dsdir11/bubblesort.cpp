@@ -39,11 +39,11 @@ int main() {
 	// 0번째는 사용 안 함. a와 b는 동일한 자료로 초기화되었음
 
 	int n = sizeof(a) / sizeof(int) - 1; // 0번째 성분 제외
-	cout << "Before Sorting : "; PrintArray(a, n);
+	cout << "Before Sorting	: "; PrintArray(a, n);
 	BubbleSort1(a, n);
-	cout << "After Sorting : "; PrintArray(a, n);
+	cout << "After Sorting	: "; PrintArray(a, n);
 
-	cout << "Before Sorting : "; PrintArray(b, n);
+	cout << "Before Sorting	: "; PrintArray(b, n);
 	BubbleSort1(b, n);
-	cout << "After Sorting : "; PrintArray(b, n);
+	cout << "After Sorting	: "; PrintArray(b, n);
 }

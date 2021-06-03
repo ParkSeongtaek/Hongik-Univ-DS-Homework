@@ -45,7 +45,7 @@ int main() {
 	// 0번재는 사용 안됨
 
 	int n = sizeof(a) / sizeof(int) - 1; // 0번째 성분 제외
-	cout << "Before Sorting : "; PrintArray(a, n);
+	cout << "Before Sorting	: "; PrintArray(a, n);
 	HeapSort(a, n);
-	cout << "After Sorting : "; PrintArray(a, n);
+	cout << "After Sorting	: "; PrintArray(a, n);
 }

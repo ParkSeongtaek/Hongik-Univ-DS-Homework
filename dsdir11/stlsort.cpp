@@ -21,7 +21,7 @@ int main() {
 	int a[] = { 0, 26, 5, 77, 1, 61, 11, 59, 15, 48, 19 };
 	int n = sizeof(a) / sizeof(int) - 1; // 0번째 성분 제외
 
-	cout << "Before Sorting : "; PrintArray(a, n);
+	cout << "Before Sorting	: "; PrintArray(a, n);
 	sort(a+1, a+n+1, myobj); // a[0, n-1]정렬 경우는 sort(a, a+n, myobj)
-	cout << "After Sorting : "; PrintArray(a, n);
+	cout << "After Sorting	: "; PrintArray(a, n);
 }
