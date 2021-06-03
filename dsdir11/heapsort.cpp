@@ -19,7 +19,7 @@ void Adjust(T *a, const int root, const int n) {
 	T e = a[root];
 
 	int j;
-	fot (j = 2*root; j <= n; j *= 2) {
+	for (j = 2*root; j <= n; j *= 2) {
 		if (j < n && a[j] < a[j+1]) j++;
 		if (e >= a[j]) break;
 		a[j/2] = a[j];
@@ -32,7 +32,7 @@ void HeapSort(T *a, const int n) {
 	for (int i = n/2; i >= 1; i--) // heapify
 		Adjust(a, i, n);
 
-	fot (int i = n-1; i >= 1; i--) {
+	for (int i = n-1; i >= 1; i--) {
 		// 1등은 끝 위치(i+1)로 보내고, 끝 위치의 것은 제자리 찾아주자
 		swap(a[1], a[i+1]); // i+1 째 위치에 제일 큰 값을 저장
 		Adjust(a, 1, i); // a[1]의 자료 이동으로 a[1:i]를 heap로 바꿈
